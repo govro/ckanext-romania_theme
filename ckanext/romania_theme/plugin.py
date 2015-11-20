@@ -1,20 +1,16 @@
-import airbrake
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import os
 
 
-# Setup error logger
-if os.getenv('AIRBRAKE_API_KEY'):
-    logger = airbrake.getLogger(api_key=os.getenv('AIRBRAKE_API_KEY'),
-                                project_id=os.getenv('AIRBRAKE_PROJECT_ID'))
-
 def get_number_of_files():
     return model.Session.execute("select count(*) from resource where state = 'active'").first()[0]
 
+
 def get_number_of_external_links():
     return model.Session.execute("select count(*) from resource where state = 'active' and url not LIKE '%data.gov.ro%'").first()[0]
+
 
 class Romania_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
