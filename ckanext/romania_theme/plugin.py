@@ -27,7 +27,7 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
         return {'get_number_of_files': get_number_of_files,
                 'get_number_of_external_links': get_number_of_external_links}
 
-+   # IResourceController
+    # IResourceController
     def before_create(self, context, resource):
         if resource['upload'].type == 'application/pdf':
             raise ValidationError(['Resource type not allowed as resource.'])
