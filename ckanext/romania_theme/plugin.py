@@ -30,4 +30,4 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
     # IResourceController
     def before_create(self, context, resource):
         if resource['upload'].type == 'application/pdf':
-            raise ValidationError(['Resource type not allowed as resource.'])
+            raise toolkit.ValidationError(['Resource type not allowed as resource.'])
