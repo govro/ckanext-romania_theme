@@ -1,4 +1,0 @@
-
-        [ckan.plugins]
-        romania_theme=ckanext.romania_theme.plugin:Romania_ThemePlugin
-    
