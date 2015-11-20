@@ -15,7 +15,9 @@ def get_number_of_external_links():
 class Romania_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IResourceController)
 
+    # IConfigurer
     def update_config(self, config):
         toolkit.add_template_directory(config, 'templates')
         toolkit.add_public_directory(config, 'public')
@@ -24,3 +26,8 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
     def get_helpers(self):
         return {'get_number_of_files': get_number_of_files,
                 'get_number_of_external_links': get_number_of_external_links}
+
++   # IResourceController
+    def before_create(self, context, resource):
+        if resource['upload'].type == 'application/pdf':
+            raise ValidationError(['Resource type not allowed as resource.'])
