@@ -29,5 +29,5 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
 
     # IResourceController
     def before_create(self, context, resource):
-        if resource['upload'].type in ['application/pdf', 'application/doc', 'application/docx']:
+        if resource['upload'].type in ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword']
             raise toolkit.ValidationError(['Fisierele de tip PDF, DOC sau DOCX nu sunt permise.'])
