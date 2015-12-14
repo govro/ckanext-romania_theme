@@ -9,3 +9,7 @@
 .homepage .stats .width-33 {
   width: 33%;
 }
+
+.inventory-message-home {
+  margin-top: 20px !important; /* TODO @palcu: c'mon dude, fix this */
+}
