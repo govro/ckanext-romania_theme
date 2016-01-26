@@ -7,12 +7,16 @@ ERROR_STRING = """Nu este permisa stergerea datelor la mai mult de 5 zile dupa
 
 
 def romania_theme_package_delete(context, data_dict):
-    if datetime.now() - data_dict['metadata_created'] < timedelta(seconds=10):
+    model = context['model']
+    package = model.Session.query(model.Package).get(data_dict['id'])
+    if datetime.now() - package.metadata_created > timedelta(days=5):
         return {'success': False, 'msg': ERROR_STRING}
     return package_delete(context, data_dict)
 
 
 def romania_theme_resource_delete(context, data_dict):
-    if datetime.now() - data_dict['metadata_created'] < timedelta(seconds=10):
+    model = context['model']
+    resource = model.Session.query(model.Resource).get(data_dict['id'])
+    if datetime.now() - resource.metadata_created > timedelta(days=5):
         return {'success': False, 'msg': ERROR_STRING}
     return resource_delete(context, data_dict)
