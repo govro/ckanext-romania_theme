@@ -13,3 +13,7 @@
 .inventory-message-home {
   margin-top: 20px !important; /* TODO @palcu: c'mon dude, fix this */
 }
+
+.masthead .site-search input {
+  width: 150px !important; /* This is because we have too many elements in the main menu */
+}
