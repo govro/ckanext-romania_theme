@@ -35,6 +35,10 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
     # IResourceController
     def before_create(self, context, resource):
         if ('upload' in resource) and (type(resource['upload']) is not unicode) and (resource['upload'].type in ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword']):
+            # If we did not do this, the URL field would contain the filename
+            # and people can press finalize afterwards.
+            resource['url'] = ''
+
             raise toolkit.ValidationError(['Fisierele de tip PDF, DOC sau DOCX nu sunt permise.'])
 
     # IAuthFunctions
