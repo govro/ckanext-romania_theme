@@ -1,13 +1,9 @@
-.. You should enable this project on travis-ci.org and coveralls.io to make
-   these badges work. The necessary Travis and Coverage config files have been
-   generated for you.
-
-.. image:: https://travis-ci.org/govro/ckanext-romania_theme.svg?branch=master
-    :target: https://travis-ci.org/govro/ckanext-romania_theme
-
 =============
 ckanext-romania_theme
 =============
+
+.. image:: https://travis-ci.org/govro/ckanext-romania_theme.svg?branch=master
+    :target: https://travis-ci.org/govro/ckanext-romania_theme
 
 This extensions includes custom modifications that have been made to
 http://data.gov.ro/ to support our own use cases.
