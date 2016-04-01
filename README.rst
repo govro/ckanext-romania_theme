@@ -2,47 +2,21 @@
    these badges work. The necessary Travis and Coverage config files have been
    generated for you.
 
-.. image:: https://travis-ci.org/palcu/ckanext-romania_theme.svg?branch=master
-    :target: https://travis-ci.org/palcu/ckanext-romania_theme
-
-.. image:: https://coveralls.io/repos/palcu/ckanext-romania_theme/badge.png?branch=master
-  :target: https://coveralls.io/r/palcu/ckanext-romania_theme?branch=master
-
-.. image:: https://pypip.in/download/ckanext-romania_theme/badge.svg
-    :target: https://pypi.python.org/pypi//ckanext-romania_theme/
-    :alt: Downloads
-
-.. image:: https://pypip.in/version/ckanext-romania_theme/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-romania_theme/
-    :alt: Latest Version
-
-.. image:: https://pypip.in/py_versions/ckanext-romania_theme/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-romania_theme/
-    :alt: Supported Python versions
-
-.. image:: https://pypip.in/status/ckanext-romania_theme/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-romania_theme/
-    :alt: Development Status
-
-.. image:: https://pypip.in/license/ckanext-romania_theme/badge.svg
-    :target: https://pypi.python.org/pypi/ckanext-romania_theme/
-    :alt: License
+.. image:: https://travis-ci.org/govro/ckanext-romania_theme.svg?branch=master
+    :target: https://travis-ci.org/govro/ckanext-romania_theme
 
 =============
 ckanext-romania_theme
 =============
 
-.. Put a description of your extension here:
-   What does it do? What features does it have?
-   Consider including some screenshots or embedding a video!
-
+This extensions includes custom modifications that have been made to
+http://data.gov.ro/ to support our own use cases.
 
 ------------
 Requirements
 ------------
 
-For example, you might want to mention here which versions of CKAN this
-extension works with.
+Built for http://github.com/datagovro/ckan version.
 
 
 ------------
@@ -76,11 +50,7 @@ To install ckanext-romania_theme:
 Config Settings
 ---------------
 
-Document any optional config settings here. For example::
-
-    # The minimum number of hours to wait before re-checking a resource
-    # (optional, default: 24).
-    ckanext.romania_theme.some_setting = some_default_value
+None a the moment
 
 
 ------------------------
@@ -103,11 +73,6 @@ Running the Tests
 To run the tests, do::
 
     nosetests --nologcapture --with-pylons=test.ini
-
-To run the tests and produce a coverage report, first make sure you have
-coverage installed in your virtualenv (``pip install coverage``) then run::
-
-    nosetests --nologcapture --with-pylons=test.ini --with-coverage --cover-package=ckanext.romania_theme --cover-inclusive --cover-erase --cover-tests
 
 
 ---------------------------------
