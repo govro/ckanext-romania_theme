@@ -4,9 +4,10 @@ import pylons.test
 
 from ckan.tests import factories
 import ckan.model as model
-import ckan.tests.helpers as helpers
 import ckan.config
 import ckan.plugins
+from routes import url_for
+from ckan.tests import factories, helpers
 
 
 class TestRomaniaTheme(helpers.FunctionalTestBase):
@@ -37,3 +38,9 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
                                             action='new'))
         field_text="field-maintainer-email"
         assert field_text not in response.body
+
+    def test_no_source_url_field_in_add_dataset_form(self):
+        response = self.app.get(url = url_for(controller='package',
+                                              action='new'))
+        field = 'id="field-url"'
+        assert field not in response.body
