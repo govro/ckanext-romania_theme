@@ -32,7 +32,7 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
         motto = 'Date accesibile, reutilizabile, ce pot fi redistribuite'
         assert motto in response.body
 
-    def test_no_source_in_data_set(self):
+    def test_no_source_url_field_in_add_dataset_form(self):
         response = self.app.get(url = url_for(controller='package',
                                               action='new'))
         field = 'id="field-url"'
