@@ -33,9 +33,7 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
         assert motto in response.body
 
     def test_maintainer_email_not_exists(self):
-        response = self.app.get(url=url_for(controller='setup',
-                                            action='delete',
-                                            id=self.setup['id']),
-                                status=200,, extra_environ=self.user_env )
-        id="field-maintainer-email"
-        assert id not in response.body
+        response = self.app.get(url=url_for(controller='package',
+                                            action='new'))
+        field_text="field-maintainer-email"
+        assert field_text not in response.body
