@@ -5,7 +5,7 @@ import pylons.test
 import ckan.model as model
 import ckan.config
 import ckan.plugins
-
+from routes import url_for
 from ckan.tests import factories, helpers
 
 
@@ -33,6 +33,7 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
         assert motto in response.body
 
     def test_no_source_in_data_set(self):
-        response = self.app.get('/en/dataset/new')
-        field = 'Source'
+        response = self.app.get(url = url_for(controller='package',
+                                              action='new'))
+        field = 'id="field-url"'
         assert field not in response.body
