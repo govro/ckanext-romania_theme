@@ -2,6 +2,7 @@ import webtest
 import paste.fixture
 import pylons.test
 
+from ckan.tests import factories
 import ckan.model as model
 import ckan.config
 import ckan.plugins
@@ -31,6 +32,12 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
         response = self.app.get('/')
         motto = 'Date accesibile, reutilizabile, ce pot fi redistribuite'
         assert motto in response.body
+
+    def test_maintainer_email_not_exists(self):
+        response = self.app.get(url=url_for(controller='package',
+                                            action='new'))
+        field_text="field-maintainer-email"
+        assert field_text not in response.body
 
     def test_no_source_url_field_in_add_dataset_form(self):
         response = self.app.get(url = url_for(controller='package',
