@@ -32,7 +32,10 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
         motto = 'Date accesibile, reutilizabile, ce pot fi redistribuite'
         assert motto in response.body
 
-    def test_(self):
-        response = self.app.get(url='/en/dataset/new', extra_environ=self.user_env )
+    def test_maintainer_email_not_exists(self):
+        response = self.app.get(url=url_for(controller='setup',
+                                            action='delete',
+                                            id=self.setup['id']),
+                                status=200,, extra_environ=self.user_env )
         id="field-maintainer-email"
         assert id not in response.body
