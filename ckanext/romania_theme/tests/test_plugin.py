@@ -2,6 +2,8 @@ import webtest
 import paste.fixture
 import pylons.test
 
+
+from ckan.tests import factories
 import ckan.model as model
 import ckan.tests.helpers as helpers
 import ckan.config
@@ -14,6 +16,11 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
         cls.app = paste.fixture.TestApp(pylons.test.pylonsapp)
         ckan.plugins.load('romania_theme')
 
+    def setup(self):
+        super(TestRomaniaTheme, self).setup()
+        self.user = factories.User()
+        self.user_env = {'REMOTE_USER': self.user['name'].encode('ascii')}
+
     def teardown(self):
         model.repo.rebuild_db()
 
@@ -25,3 +32,8 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
         response = self.app.get('/')
         motto = 'Date accesibile, reutilizabile, ce pot fi redistribuite'
         assert motto in response.body
+
+    def test_(self):
+        response = self.app.get(url='/en/dataset/new', extra_environ=self.user_env )
+        field = 'Maintainer email'
+        assert field not in response.body
