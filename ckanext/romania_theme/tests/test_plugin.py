@@ -2,7 +2,6 @@ import webtest
 import paste.fixture
 import pylons.test
 
-
 from ckan.tests import factories
 import ckan.model as model
 import ckan.tests.helpers as helpers
@@ -35,5 +34,5 @@ class TestRomaniaTheme(helpers.FunctionalTestBase):
 
     def test_(self):
         response = self.app.get(url='/en/dataset/new', extra_environ=self.user_env )
-        field = 'Maintainer email'
-        assert field not in response.body
+        id="field-maintainer-email"
+        assert id not in response.body
