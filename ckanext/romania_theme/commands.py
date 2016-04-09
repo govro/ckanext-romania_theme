@@ -26,3 +26,13 @@ class CreateInitialDataCommand(CkanCommand):
     def command(self):
         self._load_config()
         self.logger = logging.getLogger(__name__)
+       
+        if not model.User.get('admin'):
+            user=model.User(name="admin")
+            user.save()
+            user._set_password('admin')
+            user.save()
+        
+        user = model.User.get('admin')
+        user.sysadmin = True
+        user.save()
