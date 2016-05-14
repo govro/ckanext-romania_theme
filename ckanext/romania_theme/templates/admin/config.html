@@ -1,0 +1,27 @@
+{% ckan_extends %}
+
+{% import 'macros/form.html' as form %}
+
+{% block admin_form %}
+
+  {{ super() }}
+
+  <h3>Custom configuration options </h3>
+
+  {{ form.textarea('ckanext.romania_theme.disallowed_extensions', id='field-ckanext.romania_theme.disallowed_extensions', label=_('Disallowed extensions'), value=data['ckanext.romania_theme.disallowed_extensions'], error=errors['ckanext.romania_theme.disallowed_extensions']) }}
+
+   {{ form.textarea('ckanext.romania_theme.allowed_extensions', id='field-ckanext.romania_theme.allowed_extensions', label=_('Allowed extensions'), value=data['ckanext.romania_theme.allowed_extensions'], error=errors['ckanext.romania_theme.allowed_extensions']) }}
+
+
+{% endblock %}
+
+
+{% block admin_form_help %}
+
+  {{ super() }}
+
+  <p><strong>Datasets per page:</strong> Number of datasets displayed in dataset listings (eg search page).</p>
+
+  <p><strong>Test conf:</strong> An example configuration option, set from an extension.</p>
+
+{% endblock %}

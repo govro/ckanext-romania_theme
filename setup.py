@@ -79,5 +79,8 @@ setup(
     entry_points='''
         [ckan.plugins]
         romania_theme=ckanext.romania_theme.plugin:Romania_ThemePlugin
+
+        [paste.paster_command]
+        create_initial_data = ckanext.romania_theme.commands:CreateInitialDataCommand
     ''',
 )
