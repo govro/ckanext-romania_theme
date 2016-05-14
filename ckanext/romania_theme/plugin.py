@@ -19,6 +19,16 @@ def get_number_of_external_links():
     return model.Session.execute("select count(*) from resource where state = 'active' and url not LIKE '%data.gov.ro%'").first()[0]
 
 
+def extensions_not_both_mimetype_config_list(value, flattened_data, errors, context):
+    disallowed_extensions = toolkit.aslist(flattened_data[('ckanext.romania_theme.disallowed_extensions',)])
+    allowed_extensions = toolkit.aslist(flattened_data[('ckanext.romania_theme.allowed_extensions',)])
+   
+
+    if disallowed_extensions and allowed_extensions:
+        raise toolkit.Invalid("You can not place items both in allowed and disallowed extensions! ")
+    return value
+
+
 class Romania_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
@@ -39,8 +49,8 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
         ignore_missing = toolkit.get_validator('ignore_missing')
 
         schema.update({
-            'ckanext.romania_theme.disallowed_extensions': [ignore_missing, unicode],
-            'ckanext.romania_theme.allowed_extensions': [ignore_missing, unicode],
+            'ckanext.romania_theme.disallowed_extensions': [ignore_missing, extensions_not_both_mimetype_config_list],
+            'ckanext.romania_theme.allowed_extensions': [ignore_missing],
         })
 
         return schema            
@@ -66,14 +76,13 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
             else:
                 error_message= "Urmatoarele extensii sunt nepermise: " + ", ".join(disallowed_extensions) + "."
 
-        if ('upload' in resource) and (type(resource['upload']) is not unicode) and not is_resource_extension_allowed:
+        if ('upload' in resource) and (type(resource['upload']) is not unicode) \
+                and not is_resource_extension_allowed:
             # If we did not do this, the URL field would contain the filename
             # and people can press finalize afterwards.
             resource['url'] = ''
 
-
             raise toolkit.ValidationError(['Fisierul are o extensie nepermisa! ' + error_message])
-
 
     # IAuthFunctions
     def get_auth_functions(self):
@@ -81,6 +90,3 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
             'package_delete': romania_theme_package_delete,
             'resource_delete': romania_theme_resource_delete,
         }
-
-
-
