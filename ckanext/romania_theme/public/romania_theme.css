@@ -9,3 +9,7 @@
 .homepage .stats .width-33 {
   width: 33%;
 }
+
+.popular {
+  display: none;
+}
