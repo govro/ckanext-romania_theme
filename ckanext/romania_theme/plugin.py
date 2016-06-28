@@ -81,6 +81,3 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
             'package_delete': romania_theme_package_delete,
             'resource_delete': romania_theme_resource_delete,
         }
-
-
-
