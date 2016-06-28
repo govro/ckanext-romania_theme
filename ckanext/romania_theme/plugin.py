@@ -41,6 +41,7 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
         schema.update({
             'ckanext.romania_theme.disallowed_extensions': [ignore_missing, unicode],
             'ckanext.romania_theme.allowed_extensions': [ignore_missing, unicode],
+            'ckanext.romania_theme.custom_resource_download_url': [ignore_missing],
         })
 
         return schema
@@ -74,6 +75,15 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
 
             raise toolkit.ValidationError(['Fisierul are o extensie nepermisa! ' + error_message])
 
+    def before_show(context, resource_dict):
+        custom_url = config.get('romania_theme.custom_resource_download_url')
+
+        if custom_url:
+            # We should probably treat this exception. But let it fail here. You should add ckan.site_url to the config
+            old_url = config['ckan.site_url']
+            resource_dict['url'] = resource_dict['url'].replace(old_url, custom_url)
+
+        return resource_dict
 
     # IAuthFunctions
     def get_auth_functions(self):
