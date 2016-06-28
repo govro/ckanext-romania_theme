@@ -43,19 +43,19 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
             'ckanext.romania_theme.allowed_extensions': [ignore_missing, unicode],
         })
 
-        return schema            
+        return schema
 
     # IResourceController
     def before_create(self, context, resource):
         disallowed_extensions = toolkit.aslist(config.get('ckanext.romania_theme.disallowed_extensions',[]))
         disallowed_mimetypes = [mimetypes.types_map["." + x] for x in disallowed_extensions]
-        
+
         allowed_extensions = toolkit.aslist(config.get('ckanext.romania_theme.allowed_extensions',[]))
         allowed_mimetypes = [mimetypes.types_map["." + x] for x in allowed_extensions]
-        
+
         is_resource_extension_allowed = False
         error_message = ''
-        if allowed_mimetypes: 
+        if allowed_mimetypes:
             if resource['upload'].type in allowed_mimetypes:
                 is_resource_extension_allowed = True
             else:
