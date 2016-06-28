@@ -1,0 +1,16 @@
+{% ckan_extends %}
+
+{%- block scripts %}
+  {{ super() }}
+
+  <script src="/cookieconsent.js"></script>
+  <script type="text/javascript">
+  window.cookieconsent_options = {
+    "message": "Acest site folosește cookies. Navigând în continuare vă exprimați acordul asupra folosirii cookie-urilor.",
+    "dismiss":"Sunt de acord",
+    "link":"http://data.gov.ro/termeni.html",
+    "theme":"dark-top"
+  };
+  </script>
+
+{% endblock %}
