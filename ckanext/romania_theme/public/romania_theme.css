@@ -10,10 +10,6 @@
   width: 33%;
 }
 
-.popular {
-  display: none;
-}
-
 /* For cookie consent */
 .masthead .site-search input {
   width: 150px !important;
