@@ -1,8 +1,11 @@
+from pylons import config
+
 import ckan.lib.helpers as h
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import os
+import mimetypes
 
 from ckanext.romania_theme.logic.auth.delete import (
     romania_theme_package_delete, romania_theme_resource_delete)
@@ -32,10 +35,55 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
         return {'get_number_of_files': get_number_of_files,
                 'get_number_of_external_links': get_number_of_external_links}
 
+    def update_config_schema(self, schema):
+        ignore_missing = toolkit.get_validator('ignore_missing')
+
+        schema.update({
+            'ckanext.romania_theme.disallowed_extensions': [ignore_missing, unicode],
+            'ckanext.romania_theme.allowed_extensions': [ignore_missing, unicode],
+            'ckanext.romania_theme.custom_resource_download_url': [ignore_missing],
+        })
+
+        return schema
+
     # IResourceController
     def before_create(self, context, resource):
-        if ('upload' in resource) and (type(resource['upload']) is not unicode) and (resource['upload'].type in ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword']):
-            raise toolkit.ValidationError(['Fisierele de tip PDF, DOC sau DOCX nu sunt permise.'])
+        disallowed_extensions = toolkit.aslist(config.get('ckanext.romania_theme.disallowed_extensions',[]))
+        disallowed_mimetypes = [mimetypes.types_map["." + x] for x in disallowed_extensions]
+
+        allowed_extensions = toolkit.aslist(config.get('ckanext.romania_theme.allowed_extensions',[]))
+        allowed_mimetypes = [mimetypes.types_map["." + x] for x in allowed_extensions]
+
+        is_resource_extension_allowed = False
+        error_message = ''
+        if allowed_mimetypes:
+            if resource['upload'].type in allowed_mimetypes:
+                is_resource_extension_allowed = True
+            else:
+                error_message="Doar urmatoarele extensii sunt permise: " + ", ".join(allowed_extensions) + "."
+        else:
+            if resource['upload'].type not in disallowed_mimetypes:
+                is_resource_extension_allowed = True
+            else:
+                error_message= "Urmatoarele extensii sunt nepermise: " + ", ".join(disallowed_extensions) + "."
+
+        if ('upload' in resource) and (type(resource['upload']) is not unicode) and not is_resource_extension_allowed:
+            # If we did not do this, the URL field would contain the filename
+            # and people can press finalize afterwards.
+            resource['url'] = ''
+
+
+            raise toolkit.ValidationError(['Fisierul are o extensie nepermisa! ' + error_message])
+
+    def before_show(context, resource_dict):
+        custom_url = config.get('romania_theme.custom_resource_download_url')
+
+        if custom_url:
+            # We should probably treat this exception. But let it fail here. You should add ckan.site_url to the config
+            old_url = config['ckan.site_url']
+            resource_dict['url'] = resource_dict['url'].replace(old_url, custom_url)
+
+        return resource_dict
 
     # IAuthFunctions
     def get_auth_functions(self):

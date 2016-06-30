@@ -16,4 +16,9 @@
 
 .masthead .site-search input {
   width: 150px !important; /* This is because we have too many elements in the main menu */
+Î
+
+/* For cookie consent */
+.masthead .site-search input {
+  width: 150px !important;
 }
