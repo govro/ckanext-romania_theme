@@ -22,17 +22,33 @@
 }(window,document,'script'));
 </script>
 
-<h2>Sessions and users last month</h2>
+<h2>Over last year</h2>
+
+<h3>Sessions and users</h3>
 <div id="chart-1-container"></div>
 
-<h2>Downloads and API calls last month</h2>
+<h3>Downloads and API calls</h3>
 <div id="chart-4-container"></div>
 
-<h2>Most downloaded resources</h2>
+<h3>Most downloaded resources</h3>
 <div id="chart-2-container"></div>
 
-<h2>Map</h2>
+<h3>Map</h3>
 <div id="chart-3-container"></div>
+
+<h2>Over last month</h2>
+
+<h3>Sessions and users</h3>
+<div id="chart-21-container"></div>
+
+<h3>Downloads and API calls</h3>
+<div id="chart-24-container"></div>
+
+<h3>Most downloaded resources</h3>
+<div id="chart-22-container"></div>
+
+<h3>Map</h3>
+<div id="chart-23-container"></div>
 
 <script>
 
@@ -43,7 +59,7 @@ gapi.analytics.ready(function() {
    */
   gapi.analytics.auth.authorize({
     'serverAuth': {
-      'access_token': 'ya29.CjASA_KOT1IgDE2gNePE-jHy_8-P_La5J6lXrkkYUMeUMfczLxOGq669n_pAinPHe8o'
+      'access_token': 'ya29.CjASA88eHfrHH1bMqZ48uSLW9eA6ZrPD_lv2064457yt_JXjNQ4gCfeXAQPKNmf-jAE'
     }
   });
 
@@ -56,7 +72,7 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:date'
     },
     chart: {
-      'container': 'chart-1-container',
+      'container': 'chart-21-container',
       'type': 'LINE',
       'options': {
         'width': '100%'
@@ -75,7 +91,7 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:date'
     },
     chart: {
-      'container': 'chart-4-container',
+      'container': 'chart-24-container',
       'type': 'LINE',
       'options': {
         'width': '100%'
@@ -96,7 +112,7 @@ gapi.analytics.ready(function() {
       'max-results': 20
     },
     chart: {
-      'container': 'chart-2-container',
+      'container': 'chart-22-container',
       'type': 'TABLE',
     }
   });
@@ -109,6 +125,79 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:country',
       'metrics': 'ga:sessions',
       'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+    },
+    chart: {
+      type: 'GEO',
+      container: 'chart-23-container'
+    }
+  });
+  dataChart3.execute();
+
+  // Yearly
+
+  var dataChart1 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
+      'start-date': '365daysAgo',
+      'end-date': 'yesterday',
+      'metrics': 'ga:sessions,ga:users',
+      'dimensions': 'ga:yearMonth'
+    },
+    chart: {
+      'container': 'chart-1-container',
+      'type': 'LINE',
+      'options': {
+        'width': '100%'
+      }
+    }
+  });
+  dataChart1.execute();
+
+  var dataChart4 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
+      'start-date': '365daysAgo',
+      'end-date': 'yesterday',
+      'metrics': 'ga:totalEvents',
+      'filters': 'ga:eventCategory=@Resource',
+      'dimensions': 'ga:yearMonth'
+    },
+    chart: {
+      'container': 'chart-4-container',
+      'type': 'LINE',
+      'options': {
+        'width': '100%'
+      }
+    }
+  });
+  dataChart4.execute();
+
+  var dataChart2 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
+      'start-date': '365daysAgo',
+      'end-date': 'yesterday',
+      'metrics': 'ga:totalEvents',
+      'dimensions': 'ga:eventLabel',
+      'sort': '-ga:totalEvents',
+      'filters': 'ga:eventCategory==Resource',
+      'max-results': 20
+    },
+    chart: {
+      'container': 'chart-2-container',
+      'type': 'TABLE',
+    }
+  });
+  dataChart2.execute();
+
+
+  var dataChart3 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092',
+      'dimensions': 'ga:country',
+      'metrics': 'ga:sessions',
+      'start-date': '365daysAgo',
       'end-date': 'yesterday',
     },
     chart: {
