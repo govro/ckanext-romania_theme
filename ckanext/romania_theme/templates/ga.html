@@ -22,9 +22,16 @@
 }(window,document,'script'));
 </script>
 
-
+<h2>Sessions and users last month</h2>
 <div id="chart-1-container"></div>
+
+<h2>Downloads last month</h2>
+<div id="chart-4-container"></div>
+
+<h2>Most downloaded resources</h2>
 <div id="chart-2-container"></div>
+
+<h2>Map</h2>
 <div id="chart-3-container"></div>
 
 <script>
@@ -40,11 +47,6 @@ gapi.analytics.ready(function() {
     }
   });
 
-
-  /**
-   * Creates a new DataChart instance showing sessions over the past 30 days.
-   * It will be rendered inside an element with the id "chart-1-container".
-   */
   var dataChart1 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
@@ -63,22 +65,35 @@ gapi.analytics.ready(function() {
   });
   dataChart1.execute();
 
+  var dataChart4 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+      'metrics': 'ga:totalEvents',
+      'filters': 'ga:eventCategory=@Resource',
+      'dimensions': 'ga:date'
+    },
+    chart: {
+      'container': 'chart-4-container',
+      'type': 'LINE',
+      'options': {
+        'width': '100%'
+      }
+    }
+  });
+  dataChart4.execute();
 
-  /**
-   * Creates a new DataChart instance showing top 5 most popular demos/tools
-   * amongst returning users only.
-   * It will be rendered inside an element with the id "chart-3-container".
-   */
   var dataChart2 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'metrics': 'ga:pageviews',
-      'dimensions': 'ga:pagePathLevel1',
-      'sort': '-ga:pageviews',
-      'filters': 'ga:pagePathLevel1!=/',
-      'max-results': 7
+      'metrics': 'ga:totalEvents',
+      'dimensions': 'ga:eventLabel',
+      'sort': '-ga:totalEvents',
+      'filters': 'ga:eventCategory==Resource',
+      'max-results': 20
     },
     chart: {
       'container': 'chart-2-container',
@@ -88,11 +103,6 @@ gapi.analytics.ready(function() {
   dataChart2.execute();
 
 
-  /**
-   * Creates a new DataChart instance showing top 5 most popular demos/tools
-   * amongst returning users only.
-   * It will be rendered inside an element with the id "chart-3-container".
-   */
   var dataChart3 = new gapi.analytics.googleCharts.DataChart({
     query: {
       'ids': 'ga:78521092',
