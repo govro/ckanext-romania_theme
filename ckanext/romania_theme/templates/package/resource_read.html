@@ -1,3 +1,48 @@
 {% ckan_extends %}
 
 {{ super() }}
+
+{% block resource_actions_inner %}
+{% if h.check_access('package_update', {'id':pkg.id }) %}
+  <li>{% link_for _('Manage'), controller='package', action='resource_edit', id=pkg.name, resource_id=res.id, class_='btn', icon='wrench' %}</li>
+{% endif %}
+{% if res.download_url and h.is_url(res.download_url) %}
+  <li>
+    <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.download_url }}">
+      {% if res.resource_type in ('listing', 'service') %}
+        <i class="icon-eye-open"></i> {{ _('View') }}
+      {% elif  res.resource_type == 'api' %}
+        <i class="icon-key"></i> {{ _('API Endpoint') }}
+      {% elif not res.has_views or not res.can_be_previewed %}
+        <i class="icon-external-link"></i> {{ _('Go to resource') }}
+      {% else %}
+        <i class="icon-download"></i> {{ _('Download') }}
+      {% endif %}
+    </a>
+  </li>
+{% endif %}
+{% if 'datastore' in g.plugins %}
+  <li>{% snippet 'package/snippets/data_api_button.html', resource=res, datastore_root_url=c.datastore_api %}</li>
+{% endif %}
+{% endblock %}
+
+{% block resource_content %}
+  {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
+  {% block resource_read_url %}
+    {% if res.download_url and h.is_url(res.download_url) %}
+      <p class="muted ellipsis">{{ _('URL:') }} <a href="{{ res.download_url }}" title="{{ res.download_url }}">{{ res.download_url }}</a></p>
+    {% elif res.download_url %}
+      <p class="muted ellipsis">{{ _('URL:') }} {{ res.download_url }}</p>
+    {% endif %}
+  {% endblock %}
+  <div class="prose notes" property="rdfs:label">
+    {% if res.description %}
+      {{ h.render_markdown(res.description) }}
+    {% endif %}
+    {% if not res.description and c.package.notes %}
+      <h3>{{ _('From the dataset abstract') }}</h3>
+      <blockquote>{{ h.markdown_extract(h.get_translated(c.package, 'notes')) }}</blockquote>
+      <p>{% trans dataset=c.package.title, url=h.url_for(controller='package', action='read', id=c.package['name']) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}
+    {% endif %}
+  </div>
+{% endblock %}
