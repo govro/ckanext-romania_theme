@@ -52,7 +52,6 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
         schema.update({
             'ckanext.romania_theme.disallowed_extensions': [ignore_missing, unicode],
             'ckanext.romania_theme.allowed_extensions': [ignore_missing, unicode],
-            'ckanext.romania_theme.custom_resource_download_url': [ignore_missing],
         })
 
         return schema
