@@ -24,7 +24,7 @@
 
 <h2>Over last year</h2>
 
-<h3>Sessions and users</h3>
+<h3>Unique visitors</h3>
 <div id="chart-1-container"></div>
 
 <h3>Downloads and API calls</h3>
@@ -38,7 +38,7 @@
 
 <h2>Over last month</h2>
 
-<h3>Sessions and users</h3>
+<h3>Unique visitors</h3>
 <div id="chart-21-container"></div>
 
 <h3>Downloads and API calls</h3>
@@ -68,7 +68,7 @@ gapi.analytics.ready(function() {
       'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'metrics': 'ga:sessions,ga:users',
+      'metrics': 'ga:users',
       'dimensions': 'ga:date'
     },
     chart: {
@@ -141,7 +141,7 @@ gapi.analytics.ready(function() {
       'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
       'start-date': '365daysAgo',
       'end-date': 'yesterday',
-      'metrics': 'ga:sessions,ga:users',
+      'metrics': 'ga:users',
       'dimensions': 'ga:yearMonth'
     },
     chart: {
