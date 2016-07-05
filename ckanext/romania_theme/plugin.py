@@ -5,6 +5,7 @@ import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import os
+from routes.mapper import SubMapper
 import mimetypes
 
 from ckanext.romania_theme.logic.auth.delete import (
@@ -24,7 +25,17 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IResourceController, inherit=True)
     plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IRoutes, inherit=True)
 
+    # IRoutes
+    def after_map(self, mapping):
+        GA_CONTROLLER = """
+            ckanext.romania_theme.controllers.gacontroller:GAController"""
+        with SubMapper(mapping, controller=GA_CONTROLLER) as m:
+            m.connect('ga_index',
+                      '/romania_theme/ga',
+                      action='index')
+        return mapping
     # IConfigurer
     def update_config(self, config):
         toolkit.add_template_directory(config, 'templates')
@@ -41,7 +52,6 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
         schema.update({
             'ckanext.romania_theme.disallowed_extensions': [ignore_missing, unicode],
             'ckanext.romania_theme.allowed_extensions': [ignore_missing, unicode],
-            'ckanext.romania_theme.custom_resource_download_url': [ignore_missing],
         })
 
         return schema
@@ -81,8 +91,9 @@ class Romania_ThemePlugin(plugins.SingletonPlugin):
         if custom_url:
             # We should probably treat this exception. But let it fail here. You should add ckan.site_url to the config
             old_url = config['ckan.site_url']
-            resource_dict['url'] = resource_dict['url'].replace(old_url, custom_url)
-
+            resource_dict['download_url'] = resource_dict['url'].replace(old_url, custom_url)
+        else:
+            resource_dict['download_url'] = resource_dict['url']
         return resource_dict
 
     # IAuthFunctions
