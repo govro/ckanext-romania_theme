@@ -27,7 +27,16 @@
 <h3>Unique visitors</h3>
 <div id="chart-1-container"></div>
 
-<h3>Downloads and API calls</h3>
+<h3>Acquisition overview</h3>
+<div id="chart-acq2-container"></div>
+
+<h3>User profile</h3>
+<div id="chart-browser2-container"></div>
+
+<h3>Event distribution</h3>
+<div id="chart-events1-container"></div>
+
+<h3>API calls</h3>
 <div id="chart-4-container"></div>
 
 <h3>Most downloaded resources</h3>
@@ -36,19 +45,8 @@
 <h3>Map</h3>
 <div id="chart-3-container"></div>
 
-<h2>Over last month</h2>
-
-<h3>Unique visitors</h3>
-<div id="chart-21-container"></div>
-
-<h3>Downloads and API calls</h3>
-<div id="chart-24-container"></div>
-
-<h3>Most downloaded resources</h3>
-<div id="chart-22-container"></div>
-
-<h3>Map</h3>
-<div id="chart-23-container"></div>
+<h3>Top countries</h3>
+<div id="chart-top-countries-container"></div>
 
 <script>
 
@@ -62,79 +60,6 @@ gapi.analytics.ready(function() {
       'access_token': '{{token}}'
     }
   });
-
-  var dataChart1 = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
-      'start-date': '30daysAgo',
-      'end-date': 'yesterday',
-      'metrics': 'ga:users',
-      'dimensions': 'ga:date'
-    },
-    chart: {
-      'container': 'chart-21-container',
-      'type': 'LINE',
-      'options': {
-        'width': '100%'
-      }
-    }
-  });
-  dataChart1.execute();
-
-  var dataChart4 = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
-      'start-date': '30daysAgo',
-      'end-date': 'yesterday',
-      'metrics': 'ga:totalEvents',
-      'filters': 'ga:eventCategory=@Resource',
-      'dimensions': 'ga:date'
-    },
-    chart: {
-      'container': 'chart-24-container',
-      'type': 'LINE',
-      'options': {
-        'width': '100%'
-      }
-    }
-  });
-  dataChart4.execute();
-
-  var dataChart2 = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
-      'start-date': '30daysAgo',
-      'end-date': 'yesterday',
-      'metrics': 'ga:totalEvents',
-      'dimensions': 'ga:eventLabel',
-      'sort': '-ga:totalEvents',
-      'filters': 'ga:eventCategory==Resource',
-      'max-results': 20
-    },
-    chart: {
-      'container': 'chart-22-container',
-      'type': 'TABLE',
-    }
-  });
-  dataChart2.execute();
-
-
-  var dataChart3 = new gapi.analytics.googleCharts.DataChart({
-    query: {
-      'ids': 'ga:78521092',
-      'dimensions': 'ga:country',
-      'metrics': 'ga:sessions',
-      'start-date': '30daysAgo',
-      'end-date': 'yesterday',
-    },
-    chart: {
-      type: 'GEO',
-      container: 'chart-23-container'
-    }
-  });
-  dataChart3.execute();
-
-  // Yearly
 
   var dataChart1 = new gapi.analytics.googleCharts.DataChart({
     query: {
@@ -160,7 +85,7 @@ gapi.analytics.ready(function() {
       'start-date': '365daysAgo',
       'end-date': 'yesterday',
       'metrics': 'ga:totalEvents',
-      'filters': 'ga:eventCategory=@Resource',
+      'filters': 'ga:eventCategory=@API',
       'dimensions': 'ga:yearMonth'
     },
     chart: {
@@ -182,7 +107,7 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:eventLabel',
       'sort': '-ga:totalEvents',
       'filters': 'ga:eventCategory==Resource',
-      'max-results': 20
+      'max-results': 10
     },
     chart: {
       'container': 'chart-2-container',
@@ -202,11 +127,86 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'GEO',
-      container: 'chart-3-container'
+      container: 'chart-3-container',
+      'options': {
+        'width': '100%'
+      }
     }
   });
   dataChart3.execute();
 
+  var dataChart30 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092',
+      'dimensions': 'ga:country',
+      'metrics': 'ga:sessions',
+      'start-date': '365daysAgo',
+      'end-date': 'yesterday',
+      'sort': '-ga:sessions',
+      'max-results': 10
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'chart-top-countries-container',
+      'options': {
+        'width': '100%'
+      }
+    }
+  });
+  dataChart30.execute();
+
+  var dataChart9 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
+      'start-date': '365daysAgo',
+      'end-date': 'yesterday',
+      'metrics': 'ga:sessions',
+      'dimensions': 'ga:channelGrouping',
+    },
+    chart: {
+      'container': 'chart-acq2-container',
+      'type': 'PIE',
+      'options': {
+        'width': '100%'
+      }
+    }
+  });
+  dataChart9.execute();
+
+  var dataChart11 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
+      'start-date': '365daysAgo',
+      'end-date': 'yesterday',
+      'metrics': 'ga:sessions',
+      'dimensions': 'ga:browser,ga:operatingSystem',
+      'sort': '-ga:sessions',
+      'max-results': 10,
+    },
+    chart: {
+      'container': 'chart-browser2-container',
+      'type': 'TABLE',
+    }
+  });
+  dataChart11.execute();
+
+var dataChart12 = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      'ids': 'ga:78521092', // <-- Replace with the ids value for your view.
+      'start-date': '365daysAgo',
+      'end-date': 'yesterday',
+      'metrics': 'ga:totalEvents',
+      'dimensions': 'ga:eventCategory',
+    },
+    chart: {
+      'container': 'chart-events1-container',
+      'type': 'PIE',
+      'options': {
+        'width': '100%'
+      }
+    }
+  });
+  dataChart12.execute();
 });
 </script>
 
