@@ -1,14 +1,14 @@
 {% ckan_extends %}
 
 {% block footer_links_ckan %}
-  <li><a href="/termeni.html">Termeni și Condiții</a></li>
-  <li><a href="/cookie.html">Politică Cookies</a></li>
+  <li><a href="/termeni.html">{{ _('Terms and conditions') }}</a></li>
+  <li><a href="/cookie.html">{{ _('Cookies') }}</a></li>
 
   {% set api_url = 'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
   <li><a href="{{ api_url }}">{{ _('CKAN API') }}</a></li>
 
-  <li><a href="http://www.okfn.org/">Fundația pentru Cunoaștere Deschisă (Open Knowledge Foundation)</a></li>
-  <li><a href="https://github.com/govro/">Sursele Libere pe Github</a></li>
+  <li><a href="http://www.okfn.org/">{{ _('Open Knowledge Foundation') }} </a></li>
+  <li><a href="https://github.com/govro/">{{ _('Open Source on Github') }}</a></li>
   <li><a href="/stats">{{ _('Statistics') }}</a></li>
   <li><a href="{{ h.url_for('ga_index') }}">{{ _('Traffic Statistics') }}</a></li>
 {% endblock %}

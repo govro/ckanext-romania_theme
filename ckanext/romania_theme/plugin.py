@@ -2,6 +2,7 @@ from pylons import config
 
 import ckan.lib.helpers as h
 import ckan.model as model
+from ckan.lib.plugins import DefaultTranslation
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import os
@@ -20,12 +21,13 @@ def get_number_of_external_links():
     return model.Session.execute("select count(*) from resource where state = 'active' and url not LIKE '%data.gov.ro%'").first()[0]
 
 
-class Romania_ThemePlugin(plugins.SingletonPlugin):
+class Romania_ThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IResourceController, inherit=True)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IRoutes, inherit=True)
+    plugins.implements(plugins.ITranslation)
 
     # IRoutes
     def after_map(self, mapping):
