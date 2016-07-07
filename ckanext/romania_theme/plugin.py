@@ -93,9 +93,9 @@ class Romania_ThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         if custom_url:
             # We should probably treat this exception. But let it fail here. You should add ckan.site_url to the config
             old_url = config['ckan.site_url']
-            resource_dict['download_url'] = resource_dict['url'].replace(old_url, custom_url)
+            resource_dict['romania_download_url'] = resource_dict['url'].replace(old_url, custom_url)
         else:
-            resource_dict['download_url'] = resource_dict['url']
+            resource_dict['romania_download_url'] = resource_dict['url']
         return resource_dict
 
     # IAuthFunctions
