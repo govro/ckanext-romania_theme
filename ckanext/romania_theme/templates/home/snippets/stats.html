@@ -31,7 +31,7 @@
       <li class="width-33">
         <a href="{{ h.url_for(controller='package', action='search') }}">
           <b>{{ h.get_number_of_external_links() }}</b>
-          {{ _('link') if stats.linkuri_externe == 1 else _('linkuri externe') }}
+          {{ _('link') if stats.linkuri_externe == 1 else _('external links') }}
         </a>
       </li>
     </ul>
