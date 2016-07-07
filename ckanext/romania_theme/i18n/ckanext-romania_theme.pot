@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-romania_theme 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-07 10:41+0000\n"
+"POT-Creation-Date: 2016-07-07 12:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,27 @@ msgstr ""
 #: ckanext/romania_theme/templates/contact.html:5
 #: ckanext/romania_theme/templates/cookie.html:5
 #: ckanext/romania_theme/templates/termeni.html:3
-msgid "Termeni și condiții de utilizare ale portalului"
+msgid "Terms and conditions for the portal"
+msgstr ""
+
+#: ckanext/romania_theme/templates/footer.html:4
+msgid "Terms and conditions"
+msgstr ""
+
+#: ckanext/romania_theme/templates/footer.html:5
+msgid "Cookies"
 msgstr ""
 
 #: ckanext/romania_theme/templates/footer.html:8
 msgid "CKAN API"
+msgstr ""
+
+#: ckanext/romania_theme/templates/footer.html:10
+msgid "Open Knowledge Foundation"
+msgstr ""
+
+#: ckanext/romania_theme/templates/footer.html:11
+msgid "Open Source on Github"
 msgstr ""
 
 #: ckanext/romania_theme/templates/footer.html:12
@@ -65,38 +81,6 @@ msgstr ""
 
 #: ckanext/romania_theme/templates/admin/config.html:13
 msgid "Allowed extensions"
-msgstr ""
-
-#: ckanext/romania_theme/templates/home/snippets/about_text.html:1
-msgid ""
-" <p>Prin <a href=\"http://www.gov.ro/programul-de-guvernare-"
-"2012__l1a117011.html\" title=\"Programul de Guvernare 2013-2016\">Programul "
-"de Guvernare 2013-2016</a>, Guvernul României și-a asumat înființarea în "
-"directa coordonare a Primului Ministru a <a href=\"http://online.gov.ro\" "
-"title=\"Departamentul pentru Servicii Online și Design\">Departamentului "
-"pentru Servicii Online și Design</a>. Între altele, Departamentului îi revine"
-" sarcina de a conduce eforturile privind datele deschise (<em>open "
-"data</em>), împuternicind cetăţenii să identifice, să descarce și să "
-"utilizeze seturi de date publice generate sau deţinute de către administraţia"
-" publică. Fondat pe principiile transparenţei, participării şi colaborării, "
-"portalul urmăreşte modelele similare întreprinse în <a "
-"href=\"http://www.data.gov/\" title=\"data.gov\">Statele Unite ale "
-"Americii</a> şi în <a href=\"http://www.data.gov.uk/\" "
-"title=\"data.gov.uk\">Regatul Unit al Marii Britanii şi al Irlandei de "
-"Nord</a>. </p> <p>Portalul reprezintă aplicarea <a href=\"http://ec.europa.eu"
-"/digital-agenda/en/open-data/\" title=\"Open Data/Digital "
-"Agenda\">inițiativei europene Open Data</a> - punerea la dispoziția "
-"publicului de date accesibile, reutilizabile si redistribuibile in mod liber,"
-" fără a ține cont de restricții de tipul drepturi de autor (copyright), "
-"patente sau alte mecanisme de control (open data). Unele date prezente au "
-"fost deja făcute publice, iar date.gov.ro va facilita accesul la acestea, "
-"prezentându-le într-o formă unificată. </p> <p>Inițiativa <a "
-"href=\"http://www.gov.ro\" title=\"Guvernul României\">Guvernului "
-"României</a> de a publica date deschise are ca scop facilitarea înțelegerii "
-"de către cetățeni a felului în care administrația funcționează și a "
-"considerentelor aflate la baza deciziilor acesteia. Având acces la aceste "
-"informații, cetățenii își vor putea exprima opiniile și sugestiile cu privire"
-" la politicile guvernamentale. </p> "
 msgstr ""
 
 #: ckanext/romania_theme/templates/home/snippets/stats.html:5
@@ -140,7 +124,7 @@ msgid "link"
 msgstr ""
 
 #: ckanext/romania_theme/templates/home/snippets/stats.html:34
-msgid "linkuri externe"
+msgid "external links"
 msgstr ""
 
 #: ckanext/romania_theme/templates/package/resource_read.html:7
