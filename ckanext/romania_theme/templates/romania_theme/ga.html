@@ -114,6 +114,18 @@ gapi.analytics.ready(function() {
       'type': 'TABLE',
     }
   });
+  dataChart2.on('success', function(response) {
+    $(response.chart.na).find("table tbody tr").each(function(key, index) {
+      var label = $(index).find("td")[0];
+      var url = decodeURIComponent(label.innerHTML);
+      var a = document.createElement('a');
+      a.href = url;
+      a.target = "_blank";
+      a.innerHTML = url;
+      $(label).empty().append(a);
+    });
+
+  })
   dataChart2.execute();
 
 
