@@ -3,4 +3,14 @@
 {% block styles %}
   {{ super() }}
   <link rel="stylesheet" href="/romania_theme.css" />
+  
+  <div id="id01" class="modal">
+    <div class="modal-content animate">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <h3>Va rog, daca aveti timp la dispozitie, sa completati acest survey, pentru a ajuta la imbunatatirea platformei</h3>
+        <a id="surveybtn" href="https://goo.gl/forms/YJANPr130hdmtakA2" target="_blank">Mergeti la survey</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}
