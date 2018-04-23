@@ -68,22 +68,22 @@ class Romania_ThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         is_resource_extension_allowed = False
         error_message = ''
-        if allowed_mimetypes:
-            if resource['upload'].type in allowed_mimetypes:
-                is_resource_extension_allowed = True
+        if (type(resource['upload']) is not unicode):
+            if allowed_mimetypes:
+                if resource['upload'].type in allowed_mimetypes:
+                    is_resource_extension_allowed = True
+                else:
+                    error_message="Doar urmatoarele extensii sunt permise: " + ", ".join(allowed_extensions) + "."
             else:
-                error_message="Doar urmatoarele extensii sunt permise: " + ", ".join(allowed_extensions) + "."
-        else:
-            if resource['upload'].type not in disallowed_mimetypes:
-                is_resource_extension_allowed = True
-            else:
-                error_message= "Urmatoarele extensii sunt nepermise: " + ", ".join(disallowed_extensions) + "."
+                if resource['upload'].type not in disallowed_mimetypes:
+                    is_resource_extension_allowed = True
+                else:
+                    error_message= "Urmatoarele extensii sunt nepermise: " + ", ".join(disallowed_extensions) + "."
 
         if ('upload' in resource) and (type(resource['upload']) is not unicode) and not is_resource_extension_allowed:
             # If we did not do this, the URL field would contain the filename
             # and people can press finalize afterwards.
             resource['url'] = ''
-
 
             raise toolkit.ValidationError(['Fisierul are o extensie nepermisa! ' + error_message])
 
